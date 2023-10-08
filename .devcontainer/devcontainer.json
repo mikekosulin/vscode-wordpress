@@ -1,57 +1,55 @@
 {
 	"name": "WP/Woo based on docker-compose",
-
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
 	"dockerComposeFile": [
 		"../docker-compose.yaml",
 		"docker-compose.yml"
 	],
 	"service": "wp",
-
 	"workspaceFolder": "/workspace",
-
-	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"sqltools.connections": [{
-			"name": "Container database",
-			"driver": "MySQL",
-			"previewLimit": 50,
-			"server": "localhost", // for codespaces this should be probably localhost
-			"port": 3306,
-			"database": "wordpress",
-			"username": "root",
-			"password": "changeme"
-		}]
+	"customizations": {
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"sqltools.connections": [
+					{
+						"name": "Container database",
+						"driver": "MySQL",
+						"previewLimit": 50,
+						"server": "localhost", // for codespaces this should be probably localhost
+						"port": 3306,
+						"database": "wordpress",
+						"username": "root",
+						"password": "changeme"
+					}
+				]
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"felixfbecker.php-intellisense",
+				"waderyan.gitblame",
+				"ms-azuretools.vscode-docker",
+				"felixfbecker.php-debug",
+				"felixfbecker.php-pack",
+				"mtxr.sqltools",
+				"mtxr.sqltools-driver-mysql"
+			],
+		}
 	},
-	
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"felixfbecker.php-intellisense",
-		"waderyan.gitblame",
-		"ms-azuretools.vscode-docker",
-		"felixfbecker.php-debug",
-		"felixfbecker.php-pack",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-mysql"
-	],
-	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [80],
-
+	"forwardPorts": [
+		80
+	],
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
-
 	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
-	
 	"postCreateCommand": "sudo chown -R vscode:vscode .",
-
 	"postStartCommand": ".devcontainer/bin/post-start.sh",
-
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
-	
-    // allow bind mounts within /workspaces folder
-	"remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" }
+	// allow bind mounts within /workspaces folder
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	}
 }
-
